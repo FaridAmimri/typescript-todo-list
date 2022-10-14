@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { ChangeEvent, FC, useState } from 'react'
+import { ChangeEvent, FC, useState } from 'react'
 import './App.css'
 import TodoTask from './Components/TodoTask'
 import { ITask } from './Interfaces'
@@ -25,6 +25,14 @@ const App: FC = () => {
     setDeadline(0)
   }
 
+  function deleteTask(taskToDelete: string): void {
+    setTodoList(
+      todoList.filter((task) => {
+        return task.task !== taskToDelete
+      })
+    )
+  }
+
   return (
     <div className='App'>
       <div className='header'>
@@ -47,8 +55,8 @@ const App: FC = () => {
         <button onClick={addTask}>Add Task</button>
       </div>
       <div className='todoList'>
-        {todoList.map((item: ITask, key: number) => {
-          return <TodoTask key={key} task={item} />
+        {todoList.map((task: ITask, key: number) => {
+          return <TodoTask key={key} item={task} deleteTask={deleteTask} />
         })}
       </div>
     </div>
