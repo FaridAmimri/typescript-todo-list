@@ -1,20 +1,26 @@
 /** @format */
 
-import React from 'react'
 import { ITask } from '../Interfaces'
 
 interface Props {
-  task: ITask
+  item: ITask;
+  deleteTask(taskToDelete: string): void
 }
 
-function TodoTask({ task }: Props) {
+function TodoTask({ item, deleteTask }: Props) {
   return (
     <div className='task'>
       <div className='content'>
-        <span>{task.task}</span>
-        <span>{task.deadline}</span>
+        <span>{item.task}</span>
+        <span>{item.deadline}</span>
       </div>
-      <button>X</button>
+      <button
+        onClick={() => {
+          deleteTask(item.task)
+        }}
+      >
+        X
+      </button>
     </div>
   )
 }
